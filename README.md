@@ -1,5 +1,5 @@
 # Luning
-Generates Foundry-style call graph for LLVM targets (C/C++).  
+Generates Foundry-style call trace for LLVM targets (C/C++).  
 
 <img width="633" alt="Screenshot 2024-05-15 at 3 08 06 PM" src="https://github.com/fuzzland/luning/assets/10573715/0a410d72-e8fb-45fb-984c-156eeff187f6">
 
