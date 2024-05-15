@@ -1,3 +1,8 @@
+# Luning
+Generates Foundry-style call graph for LLVM targets (C/C++).  
+
+<img width="633" alt="Screenshot 2024-05-15 at 3 08 06 PM" src="https://github.com/fuzzland/luning/assets/10573715/0a410d72-e8fb-45fb-984c-156eeff187f6">
+
 ## Setup LLVM Environment
 
 ```
@@ -42,6 +47,8 @@ CXXFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" CFLAGS="-fpass
 PHP:
 ```
 $CC -shared -fPIC hooks.c -o libhooks.so
+
+git clone https://github.com/php/php-src
 cd php-src
 
 ./buildconf
