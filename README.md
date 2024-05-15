@@ -6,6 +6,8 @@ Generates Foundry-style call graph for LLVM targets (C/C++).
 ## Setup LLVM Environment
 
 ```
+export ICWD=`pwd`
+# Change paths based on your LLVM installation locations
 ./env.sh
 ```
 
@@ -39,7 +41,6 @@ CMake Project:
 # Compile the hook to so
 $CC -shared -fPIC hooks.c -o libhooks.so
 
-export ICWD=/root/call-tracer
 CXXFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" CFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" LDFLAGS="-L$ICWD -lhooks" LD_LIBRARY_PATH=$ICWD cmake ..
 CXXFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" CFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" LDFLAGS="-L$ICWD -lhooks" LD_LIBRARY_PATH=$ICWD make
 ```
@@ -53,7 +54,6 @@ cd php-src
 
 ./buildconf
 
-export ICWD=/root/call-tracer
 CXXFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" CFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" LDFLAGS="-L$ICWD -lhooks" LD_LIBRARY_PATH=$ICWD ./configure
 CXXFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" CFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" LDFLAGS="-L$ICWD -lhooks" LD_LIBRARY_PATH=$ICWD make -j100
 ```
@@ -63,8 +63,5 @@ CXXFLAGS="-fpass-plugin=$ICWD/build/instrumentation/InstrPass.so" CFLAGS="-fpass
 PHP:
 ```
 # dump calls
-LD_LIBRARY_PATH=/root/call-tracer ./sapi/cli/php -r 'echo "Hello World\n";' > res.txt 
-
-# generate callgraph
-python3 ../parser_1.py  > callgraph.txt
+LD_LIBRARY_PATH=$ICWD ./sapi/cli/php -r 'echo "Hello World\n";' | python3 ../parser_1.py  > callgraph.txt
 ```
